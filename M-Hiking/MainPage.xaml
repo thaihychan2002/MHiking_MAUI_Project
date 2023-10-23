@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:M_Hiking.ViewModel"
+             xmlns:models="clr-namespace:M_Hiking.Models"
+             x:DataType="vm:HikeViewModel"
+             x:Class="M_Hiking.MainPage"
+             Title="M-Hiking">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="{OnPlatform Default='+ Add Hike' ,iOS='+'}"
+                     Command="{Binding SetOperatingHikeCommand}"/>
+    </ContentPage.ToolbarItems>
+    <Grid RowDefinitions="Auto, *">
+        <VerticalStackLayout Grid.RowSpan="2"
+                             VerticalOptions="Center"
+                             HorizontalOptions="Center"
+                             IsVisible="{Binding IsBusy}">
+            <ActivityIndicator IsRunning="True"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Center"/>
+            <Label Text="{Binding BusyText}"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Center"/>
+        </VerticalStackLayout>
+            <Label Grid.Row="0"
+                       Text="Hikes"
+                       FontAttributes="Bold"
+                       FontSize="18"
+                       Padding="10"/>
+            <Grid Grid.Row="1"
+                  RowDefinitions="*, Auto">
+                <CollectionView Grid.Row="0"
+                                ItemsSource="{Binding Hike}">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout ItemSpacing="10"
+                                           Orientation="Vertical"/>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:Hikes">
+                            <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto"
+                                  ColumnDefinitions="*,*"
+                                  RowSpacing="5"
+                                  Padding="15"
+                                  BackgroundColor="Azure"
+                                  >
+                                <Label Grid.Row="0" Grid.Column="0" Text="Name" FontAttributes="Bold" />
+                                <Label Grid.Row="0" Grid.Column="1" Text="{Binding Name}" FontAttributes="Bold" />
+                                <Label Grid.Row="1" Grid.Column="0" Text="Location" FontAttributes="Bold" />
+                                <Label Grid.Row="1" Grid.Column="1" Text="{Binding Location}" FontAttributes="Bold" />
+                                <Label Grid.Row="2" Grid.Column="0" Text="Description" FontAttributes="Bold" />
+                                <Label Grid.Row="2" Grid.Column="1" Text="{Binding Description}" FontAttributes="Bold" />
+                                <Label Grid.Row="3" Grid.Column="0" Text="HasParking" FontAttributes="Bold" />
+                                <Label Grid.Row="3" Grid.Column="1" Text="{Binding HasParking}" FontAttributes="Bold" />
+                                <Label Grid.Row="4" Grid.Column="0" Text="Length" FontAttributes="Bold" />
+                                <Label Grid.Row="4" Grid.Column="1" Text="{Binding Length}" FontAttributes="Bold" />
+                                <Label Grid.Row="5" Grid.Column="0" Text="Date" FontAttributes="Bold" />
+                                <Label Grid.Row="5" Grid.Column="1" Text="{Binding Date}" FontAttributes="Bold" />
+                                <Button Grid.Row="6" Grid.Column="0" Text="Edit" Padding="0" Margin="5" HeightRequest="25" FontSize="12" Command="{Binding Source={RelativeSource AncestorType={x:Type vm:HikeViewModel}},Path=SetOperatingHikeCommand}" CommandParameter="{Binding .}"/>
+                            <Button Grid.Row="6" Grid.Column="1" Text="Delete" Padding="0" Margin="5" Background="PaleVioletRed" HeightRequest="25" FontSize="12" Command="{Binding Source={RelativeSource AncestorType={x:Type vm:HikeViewModel}},Path=DeleteHikeCommand}" CommandParameter="{Binding Id}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                    <CollectionView.EmptyView>
+                        <VerticalStackLayout HorizontalOptions="Center"
+                                             VerticalOptions="Center">
+                            <Label Text="No Hike Found"
+                                   FontSize="18"
+                                   FontAttributes="Bold"/>
+                            <Label Text="Try creating a hike form the form below"/>
+                        </VerticalStackLayout>
+                    </CollectionView.EmptyView>
+                </CollectionView>
+            <VerticalStackLayout Grid.Row="1">
+                <BoxView Color="{DynamicResource Primary}"
+                             HeightRequest="1"/>
+                <ScrollView  HeightRequest="200">
+                    <Grid RowDefinitions="Auto,Auto,Auto,Auto"
+                          ColumnDefinitions="*,*"
+                          Padding="10"
+                          RowSpacing="10"
+                          ColumnSpacing="10"
+                          BackgroundColor="#CCBFFA">
+                        <VerticalStackLayout Grid.Row="0" Grid.Column="0">
+                            <Label Text="Title"/>
+                            <Entry Text="{Binding OperatingHike.Name}" BackgroundColor="#DAD1F9" PlaceholderColor="Orange" Placeholder="Hike Title" Margin="0"/>
+                        </VerticalStackLayout>
+                        <VerticalStackLayout Grid.Row="0" Grid.Column="1">
+                            <Label Text="Location" FontAttributes="Bold"/>
+                            <Entry Text="{Binding OperatingHike.Location}" BackgroundColor="#DAD1F9" PlaceholderColor="Orange" Placeholder="Location" Margin="0"/>
+                        </VerticalStackLayout>
+                        <VerticalStackLayout Grid.Row="1" Grid.Column="0">
+                            <Label Text="Parking" FontAttributes="Bold"/>
+                            <Switch IsToggled="{Binding OperatingHike.HasParking}" BackgroundColor="#DAD1F9" HorizontalOptions="Start" Margin="0"/>
+                        </VerticalStackLayout>
+                        <VerticalStackLayout Grid.Row="1" Grid.Column="1">
+                            <Label Text="Length" FontAttributes="Bold"/>
+                            <Entry Text="{Binding OperatingHike.Length}" Placeholder="Length" BackgroundColor="#DAD1F9" PlaceholderColor="Orange" Margin="0" Keyboard="Numeric"/>
+                        </VerticalStackLayout>
+                        <VerticalStackLayout Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
+                            <Label Text="Level of Difficulty" FontAttributes="Bold"/>
+                            <Entry Text="{Binding OperatingHike.Difficulty}" BackgroundColor="#DAD1F9" PlaceholderColor="Orange" Placeholder="Difficulty" Margin="0"/>
+                        </VerticalStackLayout>
+                        <VerticalStackLayout Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
+                            <Label Text="Description" FontAttributes="Bold"/>
+                            <Entry Text="{Binding OperatingHike.Description}" BackgroundColor="#DAD1F9" PlaceholderColor="Orange" Placeholder="Description" Margin="0"/>
+                        </VerticalStackLayout>
+                    </Grid>
+                </ScrollView>
+                <Button
+                     x:Name="CounterBtn"
+                     Text="Update hike"
+                     HorizontalOptions="Center"
+                     VerticalOptions="End"
+                     CornerRadius="10"
+                     BackgroundColor="Orange"
+                     Padding="50,0"
+                     Margin="10"
+                    Command="{Binding SaveHikeCommand}">
+                    <Button.Triggers>
+                        <DataTrigger TargetType="Button"
+                                     Binding="{Binding OperatingHike.Id}"
+                                     Value="0">
+                            <Setter Property="Text" Value="Create hike"/>
+                        </DataTrigger>
+                    </Button.Triggers>
+                </Button>
+            </VerticalStackLayout>
+            </Grid>
+        </Grid>
+</ContentPage>

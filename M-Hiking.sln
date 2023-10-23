@@ -1,0 +1,27 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34202.233
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "M-Hiking", "M-Hiking\M-Hiking.csproj", "{B9554827-6D35-43C4-A087-03EE56FF27BA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B9554827-6D35-43C4-A087-03EE56FF27BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9554827-6D35-43C4-A087-03EE56FF27BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9554827-6D35-43C4-A087-03EE56FF27BA}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{B9554827-6D35-43C4-A087-03EE56FF27BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9554827-6D35-43C4-A087-03EE56FF27BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9554827-6D35-43C4-A087-03EE56FF27BA}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EC879901-0CCC-4A23-A31A-2D886E194DE0}
+	EndGlobalSection
+EndGlobal
