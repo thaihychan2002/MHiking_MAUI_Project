@@ -70,7 +70,7 @@ namespace M_Hiking.ViewModel
                 {
                     if(await _context.UpdateItemAsync<Hikes>(OperatingHike))
                     {
-                        var HikeCopy = OperatingHike;
+                        var HikeCopy = OperatingHike.Clone();
                         int index = Hike.IndexOf(OperatingHike);
                         Hike.RemoveAt(index);
                         Hike.Insert(index, HikeCopy);
